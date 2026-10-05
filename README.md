@@ -1,12 +1,29 @@
 # ExpenseFlow – Smart Expense Tracker 💳⚡
 
-> A full-stack, responsive financial dashboard web application built with **React.js, Node.js, Express.js, and MongoDB**. Designed for college project demonstrations and lab evaluations.
+[![Live Web App](https://img.shields.io/badge/Live_App-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://expense-tracker-vert-phi-32.vercel.app/)
+[![Live Backend API](https://img.shields.io/badge/Backend_API-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://expense-tracker-izat.onrender.com)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sivasankarkundella-cloud/expense-tracker)
+[![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-v19+-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![Express](https://img.shields.io/badge/Express-v4+-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![MySQL](https://img.shields.io/badge/MySQL-Subqueries_Engine-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://www.mysql.com/)
+
+> A full-stack, responsive financial dashboard web application built with **React.js, Node.js, Express.js, MongoDB, and MySQL Subquery Engine**. Designed for real-world personal finance management and academic lab evaluations.
+
+---
+
+### 🌐 Live Production Deployments
+- 🖥️ **Frontend Web Application (Vercel)**: [https://expense-tracker-vert-phi-32.vercel.app](https://expense-tracker-vert-phi-32.vercel.app)
+- ⚙️ **Backend API & Portal (Render)**: [https://expense-tracker-izat.onrender.com](https://expense-tracker-izat.onrender.com)
+- 📊 **Live Health Check**: [https://expense-tracker-izat.onrender.com/api/health](https://expense-tracker-izat.onrender.com/api/health)
+- 💾 **Export MySQL Schema (.sql)**: [https://expense-tracker-izat.onrender.com/api/sql/export-dump](https://expense-tracker-izat.onrender.com/api/sql/export-dump)
 
 ---
 
 ## 🌟 1. Project Overview
 
-**ExpenseFlow** is a modern personal finance and expense tracking web application. It empowers users to track income and expenses, monitor real-time cash flow balances, filter and search through transaction histories, visualize category distributions and monthly trends with interactive charts, and export reports to CSV.
+**ExpenseFlow** is a modern personal finance and expense tracking web application. It empowers users to track income and expenses, monitor real-time cash flow balances, filter and search through transaction histories, visualize category distributions and monthly trends with interactive charts, execute real-world SQL subqueries directly in browser, and export reports to CSV or MySQL dumps.
 
 ---
 
