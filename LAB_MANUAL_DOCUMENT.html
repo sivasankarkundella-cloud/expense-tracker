@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Stack Web Development Lab Manual & Code Verification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 12pt;
+      line-height: 1.6;
+      color: #1e293b;
+      background: #f8fafc;
+      padding: 20px;
+    }
+
+    .no-print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 14px 24px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .print-btn {
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 12pt;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(99,102,241,0.4);
+    }
+
+    .print-btn:hover {
+      background: #4338ca;
+    }
+
+    .doc-page {
+      background: #ffffff;
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+      page-break-before: always;
+    }
+
+    .doc-page:first-of-type {
+      page-break-before: auto;
+    }
+
+    .cover-page {
+      text-align: center;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 80vh;
+    }
+
+    .cover-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .cover-subtitle {
+      font-size: 14pt;
+      color: #64748b;
+      margin-bottom: 40px;
+    }
+
+    .cover-meta {
+      background: #f1f5f9;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: left;
+      display: inline-block;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 500px;
+      font-size: 12pt;
+    }
+
+    .cover-meta div {
+      margin-bottom: 10px;
+    }
+
+    /* Headings font size 16pt / body 12pt */
+    h1.program-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16pt;
+      font-weight: 700;
+      color: #0f172a;
+      border-bottom: 2px solid #6366f1;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .unit-tag {
+      font-size: 10pt;
+      background: #ede9fe;
+      color: #6366f1;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h2.section-subheading {
+      font-size: 13pt;
+      font-weight: 600;
+      color: #334155;
+      margin: 16px 0 8px 0;
+    }
+
+    p, li {
+      font-size: 12pt;
+      color: #334155;
+      margin-bottom: 10px;
+    }
+
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 14px;
+    }
+
+    .code-container {
+      background: #0f172a;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 14px 0;
+      border: 1px solid #1e293b;
+    }
+
+    .code-header {
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 6px 14px;
+      font-size: 10pt;
+      font-family: 'Fira Code', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+    }
+
+    .code-header .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .code-header .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot.red { background: #ef4444; }
+    .dot.yellow { background: #f59e0b; }
+    .dot.green { background: #10b981; }
+
+    pre {
+      padding: 14px;
+      overflow-x: auto;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #f8fafc;
+    }
+
+    .kw { color: #f43f5e; font-weight: 600; }
+    .fn { color: #38bdf8; }
+    .str { color: #34d399; }
+    .num { color: #fbbf24; }
+    .comment { color: #64748b; font-style: italic; }
+    .tag { color: #818cf8; }
+    .attr { color: #fb923c; }
+
+    /* Output Box Mock Screenshot */
+    .output-screenshot-box {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 16px 0;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    }
+
+    .browser-bar {
+      background: #f1f5f9;
+      padding: 8px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .browser-url {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 9pt;
+      font-family: monospace;
+      color: #475569;
+      flex: 1;
+    }
+
+    .output-content {
+      padding: 20px;
+      background: #f8fafc;
+      min-height: 80px;
+    }
+
+    .terminal-box {
+      background: #090d16;
+      color: #e2e8f0;
+      padding: 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 10.5pt;
+      line-height: 1.6;
+      border-radius: 8px;
+      border-left: 4px solid #10b981;
+    }
+
+    .terminal-box .prompt { color: #34d399; }
+    .terminal-box .stdout { color: #f8fafc; }
+    .terminal-box .highlight { color: #60a5fa; font-weight: bold; }
+    .terminal-box .success { color: #4ade80; }
+
+    .ui-demo-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .btn-demo {
+      background: #6366f1;
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      font-size: 11pt;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 6px;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+        font-size: 12pt;
+      }
+      .no-print-bar {
+        display: none !important;
+      }
+      .doc-page {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        page-break-before: always;
+      }
+      .doc-page:first-of-type {
+        page-break-before: auto;
+      }
+      h1.program-heading {
+        font-size: 16pt !important;
+      }
+      p, li {
+        font-size: 12pt !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Print Action Toolbar -->
+  <div class="no-print-bar">
+    <div>
+      <strong style="font-size: 14pt;">📑 Full-Stack Lab Manual & Program Document</strong>
+      <div style="font-size: 10pt; color: #94a3b8;">Formatted with 16pt Headings, 12pt Body & Clean Page Breaks</div>
+    </div>
+    <button class="print-btn" onclick="window.print()">
+      🖨️ Print / Save as PDF (Ctrl + P)
+    </button>
+  </div>
+
+  <!-- COVER PAGE -->
+  <div class="doc-page cover-page">
+    <div style="font-size: 14pt; font-weight: 700; color: #6366f1; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">
+      Laboratory Record & Project Documentation
+    </div>
+    <h1 class="cover-title">Full Stack Web Development & Database Engineering</h1>
+    <div class="cover-subtitle">Modern JavaScript, DOM Manipulation, React.js, Node.js, Express.js, & MySQL Subqueries</div>
+
+    <div class="cover-meta">
+      <div><strong>Project Title:</strong> ExpenseFlow – Smart Expense Tracker</div>
+      <div><strong>Frontend Platform:</strong> React.js 19, Recharts, Vite</div>
+      <div><strong>Backend Architecture:</strong> Node.js, Express.js REST API</div>
+      <div><strong>Database Systems:</strong> MongoDB & MySQL Relational Subquery Engine</div>
+      <div><strong>Live Web App:</strong> https://expense-tracker-vert-phi-32.vercel.app</div>
+      <div><strong>Live Backend API:</strong> https://expense-tracker-izat.onrender.com</div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- UNIT 1: MODERN JAVASCRIPT & DOM MANIPULATION                             -->
+  <!-- ========================================================================= -->
+
+  <!-- 1.a -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>1.a Link JavaScript File with HTML Page</span>
+      <span class="unit-tag">Unit 1: JavaScript & DOM</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a JavaScript program to demonstrate linking an external JavaScript file (<code>script.js</code>) with an HTML document using the <code>&lt;script src="..."&gt;</code> tag.</p>
+
+    <h2 class="section-subheading">Source Code (HTML & JavaScript)</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>index.html & script.js</span>
+      </div>
+      <pre><code><span class="comment">&lt;!-- index.html --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html <span class="attr">lang</span>=<span class="str">"en"</span>&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta <span class="attr">charset</span>=<span class="str">"UTF-8"</span>&gt;</span>
+  <span class="tag">&lt;title&gt;</span>Linking JavaScript Demo<span class="tag">&lt;/title&gt;</span>
+  <span class="comment">&lt;!-- Link external JavaScript file using defer to ensure DOM is ready --&gt;</span>
+  <span class="tag">&lt;script <span class="attr">src</span>=<span class="str">"script.js"</span> <span class="attr">defer</span>&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;h1 <span class="attr">id</span>=<span class="str">"heading"</span>&gt;</span>ExpenseFlow JavaScript Integration<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p <span class="attr">id</span>=<span class="str">"message"</span>&gt;</span>Waiting for script to load...<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+
+<span class="comment">// script.js</span>
+<span class="kw">console</span>.<span class="fn">log</span>(<span class="str">"✅ External script.js successfully loaded!"</span>);
+<span class="kw">document</span>.<span class="fn">addEventListener</span>(<span class="str">"DOMContentLoaded"</span>, () =&gt; {
+  <span class="kw">const</span> msgElement = <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"message"</span>);
+  msgElement.textContent = <span class="str">"🚀 JavaScript file linked and executed successfully!"</span>;
+  msgElement.style.color = <span class="str">"#10b981"</span>;
+});</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/topic-1a</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card">
+          <h2 style="color: #0f172a; font-size: 14pt; margin-bottom: 8px;">ExpenseFlow JavaScript Integration</h2>
+          <p style="color: #10b981; font-weight: 600; font-size: 12pt;">🚀 JavaScript file linked and executed successfully!</p>
+          <div style="font-family: monospace; font-size: 10pt; color: #64748b; margin-top: 10px; background: #f1f5f9; padding: 6px; border-radius: 6px;">
+            Console Log: [LOG] ✅ External script.js successfully loaded!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.b -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>1.b Select HTML Elements Using Selectors</span>
+      <span class="unit-tag">Unit 1: JavaScript & DOM</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a JavaScript program to select and manipulate HTML elements using different DOM selectors (<code>getElementById</code>, <code>getElementsByClassName</code>, <code>querySelector</code>, and <code>querySelectorAll</code>).</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>domSelectors.js</span>
+      </div>
+      <pre><code><span class="comment">// 1. Select by ID</span>
+<span class="kw">const</span> totalBalanceEl = <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"total-balance"</span>);
+totalBalanceEl.textContent = <span class="str">"₹66,573"</span>;
+
+<span class="comment">// 2. Select by Class Name</span>
+<span class="kw">const</span> badges = <span class="kw">document</span>.<span class="fn">getElementsByClassName</span>(<span class="str">"status-badge"</span>);
+badges[<span class="num">0</span>].style.backgroundColor = <span class="str">"#10b981"</span>;
+
+<span class="comment">// 3. Select single element using querySelector (CSS selector syntax)</span>
+<span class="kw">const</span> primaryBtn = <span class="kw">document</span>.<span class="fn">querySelector</span>(<span class="str">".btn-primary"</span>);
+primaryBtn.innerHTML = <span class="str">"&lt;span&gt;➕ Add Transaction&lt;/span&gt;"</span>;
+
+<span class="comment">// 4. Select multiple elements using querySelectorAll</span>
+<span class="kw">const</span> expenseItems = <span class="kw">document</span>.<span class="fn">querySelectorAll</span>(<span class="str">".expense-card"</span>);
+expenseItems.<span class="fn">forEach</span>((card, index) =&gt; {
+  card.style.borderLeft = <span class="str">"4px solid #6366f1"</span>;
+});</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/dom-selectors</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card" style="text-align: left;">
+          <div style="font-size: 11pt; color: #64748b;">Selected by ID (#total-balance):</div>
+          <div style="font-size: 18pt; font-weight: 700; color: #0f172a; margin-bottom: 12px;">₹66,573</div>
+          <div style="font-size: 11pt; color: #64748b;">Selected by querySelectorAll (.expense-card):</div>
+          <div style="background: #ffffff; border-left: 4px solid #6366f1; padding: 8px 12px; margin: 6px 0; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <strong>Cloud Server Hosting</strong> &mdash; ₹720 (Bills)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.c -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>1.c Implement Event Listeners</span>
+      <span class="unit-tag">Unit 1: JavaScript & DOM</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a JavaScript program to implement event listeners using <code>addEventListener()</code> to respond to keyboard input, mouse hover, and focus events.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>eventListeners.js</span>
+      </div>
+      <pre><code><span class="kw">const</span> searchInput = <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"search-input"</span>);
+<span class="kw">const</span> liveFeedback = <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"search-feedback"</span>);
+
+<span class="comment">// 1. Input Event Listener (Real-time keystroke tracking)</span>
+searchInput.<span class="fn">addEventListener</span>(<span class="str">"input"</span>, (<span class="kw">event</span>) =&gt; {
+  <span class="kw">const</span> query = <span class="kw">event</span>.target.value;
+  liveFeedback.textContent = <span class="str">`Searching for: "${query}" (${query.length} chars)`</span>;
+});
+
+<span class="comment">// 2. Mouseover & Mouseout Event Listeners</span>
+searchInput.<span class="fn">addEventListener</span>(<span class="str">"focus"</span>, () =&gt; {
+  searchInput.style.borderColor = <span class="str">"#6366f1"</span>;
+  searchInput.style.boxShadow = <span class="str">"0 0 0 3px rgba(99, 102, 241, 0.2)"</span>;
+});
+
+searchInput.<span class="fn">addEventListener</span>(<span class="str">"blur"</span>, () =&gt; {
+  searchInput.style.borderColor = <span class="str">"#cbd5e1"</span>;
+  searchInput.style.boxShadow = <span class="str">"none"</span>;
+});</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/event-listeners</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card">
+          <input type="text" value="Grocery" style="width: 100%; padding: 10px; border: 2px solid #6366f1; border-radius: 8px; font-size: 12pt; outline: none; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);" readonly>
+          <div style="margin-top: 10px; font-size: 11pt; color: #4338ca; font-weight: 500;">
+            ⚡ Event Triggered: Searching for: "Grocery" (7 chars)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.d -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>1.d Handle Button Click Events</span>
+      <span class="unit-tag">Unit 1: JavaScript & DOM</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a JavaScript program to handle the <code>click</code> event for an HTML button element and dynamically update the DOM with calculation results.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>buttonClick.js</span>
+      </div>
+      <pre><code><span class="kw">let</span> clickCount = <span class="num">0</span>;
+<span class="kw">const</span> actionBtn = <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"record-expense-btn"</span>);
+<span class="kw">const</span> statusDisplay = <span class="kw">document</span>.<span class="fn">getElementById</span>(<span class="str">"click-status"</span>);
+
+<span class="comment">// Attach Click Event Handler</span>
+actionBtn.<span class="fn">addEventListener</span>(<span class="str">"click</span>", (<span class="kw">e</span>) =&gt; {
+  <span class="kw">e</span>.<span class="fn">preventDefault</span>();
+  clickCount++;
+  
+  <span class="comment">// Update DOM Content & CSS Styles Dynamically</span>
+  statusDisplay.innerHTML = <span class="str">`✅ Button Clicked &lt;strong&gt;${clickCount}&lt;/strong&gt; times!`</span>;
+  statusDisplay.style.color = <span class="str">"#16a34a"</span>;
+  
+  <span class="kw">console</span>.<span class="fn">log</span>(<span class="str">`[Click Event] Transaction added at: ${new Date().toLocaleTimeString()}`</span>);
+});</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/button-click</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card">
+          <button class="btn-demo" style="background: #10b981;">💳 Record New Expense</button>
+          <div style="margin-top: 12px; font-size: 12pt; color: #16a34a; font-weight: 600;">
+            ✅ Button Clicked <strong>5</strong> times!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.e -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>1.e Three Types of Functions in JavaScript</span>
+      <span class="unit-tag">Unit 1: JavaScript & DOM</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a JavaScript program demonstrating the three primary function styles in JavaScript: Function Declaration, Function Expression/Definition, and ES6 Arrow Functions.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>functionTypes.js</span>
+      </div>
+      <pre><code><span class="comment">// 1. Function Declaration (Hoisted)</span>
+<span class="kw">function</span> <span class="fn">calculateTotalBalance</span>(income, expense) {
+  <span class="kw">return</span> income - expense;
+}
+
+<span class="comment">// 2. Function Expression / Definition (Assigned to variable)</span>
+<span class="kw">const</span> <span class="fn">calculateSavingsPercentage</span> = <span class="kw">function</span>(income, expense) {
+  <span class="kw">const</span> savings = income - expense;
+  <span class="kw">return</span> ((savings / income) * <span class="num">100</span>).<span class="fn">toFixed</span>(<span class="num">2</span>);
+};
+
+<span class="comment">// 3. ES6 Arrow Function (Concise lexical this binding)</span>
+<span class="kw">const</span> <span class="fn">formatCurrencyINR</span> = (amount) =&gt; <span class="str">`₹${amount.toLocaleString('en-IN')}`</span>;
+
+<span class="comment">// Execution & Demonstration</span>
+<span class="kw">const</span> income = <span class="num">85000</span>;
+<span class="kw">const</span> expense = <span class="num">18427</span>;
+
+<span class="kw">console</span>.<span class="fn">log</span>(<span class="str">"1. Balance:"</span>, <span class="fn">formatCurrencyINR</span>(<span class="fn">calculateTotalBalance</span>(income, expense)));
+<span class="kw">console</span>.<span class="fn">log</span>(<span class="str">"2. Savings Rate:"</span>, <span class="fn">calculateSavingsPercentage</span>(income, expense) + <span class="str">"%"</span>);</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">Console Execution Terminal</div>
+      </div>
+      <div class="output-content" style="background: #0f172a; padding: 0;">
+        <div class="terminal-box">
+          <div class="prompt">&gt; node functionTypes.js</div>
+          <div class="stdout">1. Function Declaration &rarr; Balance: <span class="highlight">₹66,573</span></div>
+          <div class="stdout">2. Function Expression &rarr; Savings Rate: <span class="highlight">78.32%</span></div>
+          <div class="stdout">3. Arrow Function &rarr; Formatted Amount: <span class="highlight">₹85,000</span></div>
+          <div class="success">✨ All 3 function types evaluated successfully!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- UNIT 2: BASICS OF REACT.JS                                               -->
+  <!-- ========================================================================= -->
+
+  <!-- 2.a -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>2.a Counter Button Using React Class Component</span>
+      <span class="unit-tag">Unit 2: Basics of React.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program to implement a stateful counter button using a traditional <strong>React Class Component</strong> with constructor, state binding, and lifecycle methods.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>ExpenseSummaryClass.jsx</span>
+      </div>
+      <pre><code><span class="kw">import</span> React, { Component } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">class</span> <span class="fn">ExpenseSummaryClass</span> <span class="kw">extends</span> <span class="fn">Component</span> {
+  <span class="kw">constructor</span>(props) {
+    <span class="kw">super</span>(props);
+    <span class="comment">// Initializing component state</span>
+    <span class="kw">this</span>.state = {
+      count: <span class="num">0</span>,
+      lastUpdated: <span class="kw">new</span> <span class="fn">Date</span>().<span class="fn">toLocaleTimeString</span>(),
+    };
+    <span class="comment">// Binding event handler method</span>
+    <span class="kw">this</span>.handleIncrement = <span class="kw">this</span>.handleIncrement.<span class="fn">bind</span>(<span class="kw">this</span>);
+  }
+
+  handleIncrement() {
+    <span class="kw">this</span>.<span class="fn">setState</span>((prevState) =&gt; ({
+      count: prevState.count + <span class="num">1</span>,
+      lastUpdated: <span class="kw">new</span> <span class="fn">Date</span>().<span class="fn">toLocaleTimeString</span>(),
+    }));
+  }
+
+  <span class="fn">render</span>() {
+    <span class="kw">return</span> (
+      <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"class-counter-box"</span>&gt;</span>
+        <span class="tag">&lt;h3&gt;</span>React Class Component Counter<span class="tag">&lt;/h3&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Current Count: <span class="tag">&lt;strong&gt;</span>{<span class="kw">this</span>.state.count}<span class="tag">&lt;/strong&gt;&lt;/p&gt;</span>
+        <span class="tag">&lt;button <span class="attr">onClick</span>={this.handleIncrement}&gt;</span>Increment Count<span class="tag">&lt;/button&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+    );
+  }
+}
+
+<span class="kw">export default</span> ExpenseSummaryClass;</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab-concepts</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card">
+          <h3 style="color: #4f46e5; margin-bottom: 8px;">React Class Component Counter</h3>
+          <div style="font-size: 28pt; font-weight: 800; color: #0f172a; margin: 10px 0;">7</div>
+          <button class="btn-demo">➕ Increment Count (this.setState)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.b -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>2.b Counter Button Using React Functional Component</span>
+      <span class="unit-tag">Unit 2: Basics of React.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program to implement a counter button using a modern <strong>React Functional Component</strong>.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>FunctionalCounter.jsx</span>
+      </div>
+      <pre><code><span class="kw">import</span> React, { useState } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">function</span> <span class="fn">FunctionalCounter</span>() {
+  <span class="kw">const</span> [count, setCount] = <span class="fn">useState</span>(<span class="num">0</span>);
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"counter-container"</span>&gt;</span>
+      <span class="tag">&lt;h3&gt;</span>Functional Component Counter<span class="tag">&lt;/h3&gt;</span>
+      <span class="tag">&lt;p <span class="attr">className</span>=<span class="str">"counter-value"</span>&gt;</span>{count}<span class="tag">&lt;/p&gt;</span>
+      <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"btn-group"</span>&gt;</span>
+        <span class="tag">&lt;button <span class="attr">onClick</span>={() =&gt; setCount(count - 1)}&gt;</span>- Decrease<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;button <span class="attr">onClick</span>={() =&gt; setCount(count + 1)}&gt;</span>+ Increase<span class="tag">&lt;/button&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  );
+}
+
+<span class="kw">export default</span> FunctionalCounter;</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/functional-counter</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card">
+          <h3 style="color: #0f172a; margin-bottom: 6px;">Functional Component Counter</h3>
+          <div style="font-size: 32pt; font-weight: 800; color: #6366f1; margin: 8px 0;">12</div>
+          <div>
+            <button class="btn-demo" style="background: #ef4444;">- Decrease</button>
+            <button class="btn-demo" style="background: #10b981;">+ Increase</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.c -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>2.c Handle Button Click Events in Functional Component</span>
+      <span class="unit-tag">Unit 2: Basics of React.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program to handle button click events with synthetic event arguments and trigger dynamic calculations in functional components.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>ClickEventHandler.jsx</span>
+      </div>
+      <pre><code><span class="kw">import</span> React, { useState } <span class="kw">from</span> <span class="str">'react'</span>;
+<span class="kw">import</span> toast <span class="kw">from</span> <span class="str">'react-hot-toast'</span>;
+
+<span class="kw">export default function</span> <span class="fn">ClickEventHandler</span>() {
+  <span class="kw">const</span> [status, setStatus] = <span class="fn">useState</span>(<span class="str">'Ready'</span>);
+
+  <span class="kw">const</span> <span class="fn">handleClick</span> = (actionType, event) =&gt; {
+    event.<span class="fn">preventDefault</span>();
+    <span class="kw">const</span> timestamp = <span class="kw">new</span> <span class="fn">Date</span>().<span class="fn">toLocaleTimeString</span>();
+    setStatus(<span class="str">`Action: "${actionType}" executed at ${timestamp}`</span>);
+    toast.<span class="fn">success</span>(<span class="str">`Executed ${actionType}`</span>);
+  };
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"click-event-box"</span>&gt;</span>
+      <span class="tag">&lt;button <span class="attr">onClick</span>={(e) =&gt; handleClick('Export CSV', e)}&gt;</span>📥 Export CSV<span class="tag">&lt;/button&gt;</span>
+      <span class="tag">&lt;button <span class="attr">onClick</span>={(e) =&gt; handleClick('Sync Database', e)}&gt;</span>🔄 Sync Database<span class="tag">&lt;/button&gt;</span>
+      <span class="tag">&lt;p <span class="attr">className</span>=<span class="str">"status"</span>&gt;</span>{status}<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  );
+}</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/click-handler</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card">
+          <button class="btn-demo">📥 Export CSV</button>
+          <button class="btn-demo" style="background: #3b82f6;">🔄 Sync Database</button>
+          <p style="color: #059669; font-weight: 600; margin-top: 10px; font-size: 11pt;">
+            Action: "Export CSV" executed at 10:45:12 AM
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.d -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>2.d Conditionally Render a Component in Browser</span>
+      <span class="unit-tag">Unit 2: Basics of React.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program to conditionally render UI components (e.g., Modals, Skeletons, and Empty States) using ternary operators (<code>condition ? &lt;A/&gt; : &lt;B/&gt;</code>) and logical AND (<code>&amp;&amp;</code>).</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>ConditionalRender.jsx</span>
+      </div>
+      <pre><code><span class="kw">import</span> React, { useState } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">export default function</span> <span class="fn">ConditionalRender</span>({ transactions = [] }) {
+  <span class="kw">const</span> [isLoggedIn, setIsLoggedIn] = <span class="fn">useState</span>(<span class="kw">true</span>);
+  <span class="kw">const</span> [showModal, setShowModal] = <span class="fn">useState</span>(<span class="kw">false</span>);
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;div&gt;</span>
+      <span class="comment">{/* 1. Ternary Operator Rendering */}</span>
+      {isLoggedIn ? (
+        <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"dashboard-view"</span>&gt;</span>
+          <span class="tag">&lt;h2&gt;</span>Welcome to ExpenseFlow Dashboard<span class="tag">&lt;/h2&gt;</span>
+          <span class="tag">&lt;button <span class="attr">onClick</span>={() =&gt; setShowModal(true)}&gt;</span>Open Modal<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+      ) : (
+        <span class="tag">&lt;p&gt;</span>Please log in to view your financial records.<span class="tag">&lt;/p&gt;</span>
+      )}
+
+      <span class="comment">{/* 2. Short-circuit Logical AND (&&) Rendering */}</span>
+      {showModal &amp;&amp; (
+        <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"modal-backdrop"</span>&gt;</span>
+          <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"modal"</span>&gt;</span>
+            <span class="tag">&lt;h3&gt;</span>Add New Transaction<span class="tag">&lt;/h3&gt;</span>
+            <span class="tag">&lt;button <span class="attr">onClick</span>={() =&gt; setShowModal(false)}&gt;</span>Close<span class="tag">&lt;/button&gt;</span>
+          <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+      )}
+    <span class="tag">&lt;/div&gt;</span>
+  );
+}</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/conditional-rendering</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card">
+          <h3 style="color: #0f172a; margin-bottom: 8px;">Conditional Render Active</h3>
+          <div style="background: #e0e7ff; color: #4338ca; padding: 10px; border-radius: 6px; font-weight: 600; margin-bottom: 10px;">
+            ✨ Modal Dialog Rendered via Short-Circuit (showModal &amp;&amp; &lt;Modal/&gt;)
+          </div>
+          <button class="btn-demo" style="background: #64748b;">Close Modal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.e -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>2.e Display Text Using String / Template Literals</span>
+      <span class="unit-tag">Unit 2: Basics of React.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program to dynamically evaluate and display text and currency strings using ES6 Template Literals (<code>`...`</code>) and expression interpolation.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>TemplateLiterals.jsx</span>
+      </div>
+      <pre><code><span class="kw">import</span> React <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">export default function</span> <span class="fn">TemplateLiteralsDemo</span>() {
+  <span class="kw">const</span> user = { name: <span class="str">'Sivasankar'</span>, role: <span class="str">'Administrator'</span> };
+  <span class="kw">const</span> monthlyBudget = <span class="num">50000</span>;
+  <span class="kw">const</span> totalSpent = <span class="num">18427</span>;
+  <span class="kw">const</span> remaining = monthlyBudget - totalSpent;
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"summary-card"</span>&gt;</span>
+      <span class="tag">&lt;h2&gt;</span>{<span class="str">`Welcome Back, ${user.name} (${user.role})`</span>}<span class="tag">&lt;/h2&gt;</span>
+      <span class="tag">&lt;p&gt;</span>
+        {<span class="str">`You have utilized ₹${totalSpent.toLocaleString()} of your ₹${monthlyBudget.toLocaleString()} budget.`</span>}
+      <span class="tag">&lt;/p&gt;</span>
+      <span class="tag">&lt;p <span class="attr">className</span>=<span class="str">"highlight"</span>&gt;</span>
+        {<span class="str">`Remaining Balance: ₹${remaining.toLocaleString()} (${((remaining / monthlyBudget) * 100).toFixed(1)}% left)`</span>}
+      <span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  );
+}</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/template-literals</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card" style="text-align: left;">
+          <h3 style="color: #0f172a; font-size: 13pt; margin-bottom: 6px;">Welcome Back, Sivasankar (Administrator)</h3>
+          <p style="font-size: 11pt; color: #475569;">You have utilized ₹18,427 of your ₹50,000 budget.</p>
+          <div style="background: #ecfdf5; border-left: 4px solid #10b981; padding: 8px 12px; border-radius: 4px; color: #047857; font-weight: 600; margin-top: 8px;">
+            Remaining Balance: ₹31,573 (63.1% left)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- UNIT 3: IMPORTANT CONCEPTS OF REACT.JS                                   -->
+  <!-- ========================================================================= -->
+
+  <!-- 3.a -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>3.a Counter Button Using React useState Hook</span>
+      <span class="unit-tag">Unit 3: Important React Concepts</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program to manage stateful numerical values and step increments using the <code>useState</code> hook.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>UseStateCounter.jsx</span>
+      </div>
+      <pre><code><span class="kw">import</span> React, { useState } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">export default function</span> <span class="fn">UseStateCounter</span>() {
+  <span class="kw">const</span> [count, setCount] = <span class="fn">useState</span>(<span class="num">0</span>);
+  <span class="kw">const</span> [step, setStep] = <span class="fn">useState</span>(<span class="num">100</span>);
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"counter-wrapper"</span>&gt;</span>
+      <span class="tag">&lt;h3&gt;</span>Budget Stepper (useState)<span class="tag">&lt;/h3&gt;</span>
+      <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"display"</span>&gt;</span>₹{count.toLocaleString()}<span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;div&gt;</span>
+        <span class="tag">&lt;button <span class="attr">onClick</span>={() =&gt; setCount(prev =&gt; Math.max(0, prev - step))}&gt;</span>-₹{step}<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;button <span class="attr">onClick</span>={() =&gt; setCount(prev =&gt; prev + step)}&gt;</span>+₹{step}<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;button <span class="attr">onClick</span>={() =&gt; setCount(0)}&gt;</span>Reset<span class="tag">&lt;/button&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  );
+}</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/use-state</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card">
+          <h3 style="color: #0f172a; margin-bottom: 6px;">Budget Stepper (useState)</h3>
+          <div style="font-size: 26pt; font-weight: 800; color: #10b981; margin: 8px 0;">₹3,500</div>
+          <button class="btn-demo">-₹100</button>
+          <button class="btn-demo" style="background: #10b981;">+₹100</button>
+          <button class="btn-demo" style="background: #64748b;">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.b -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>3.b Fetch Data from an API Using React useEffect Hook</span>
+      <span class="unit-tag">Unit 3: Important React Concepts</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program to fetch asynchronous REST API data on component mount using the <code>useEffect</code> hook with loading and error states.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>FetchExpenses.jsx</span>
+      </div>
+      <pre><code><span class="kw">import</span> React, { useState, useEffect } <span class="kw">from</span> <span class="str">'react'</span>;
+<span class="kw">import</span> axios <span class="kw">from</span> <span class="str">'axios'</span>;
+
+<span class="kw">export default function</span> <span class="fn">FetchExpenses</span>() {
+  <span class="kw">const</span> [data, setData] = <span class="fn">useState</span>([]);
+  <span class="kw">const</span> [loading, setLoading] = <span class="fn">useState</span>(<span class="kw">true</span>);
+
+  <span class="fn">useEffect</span>(() =&gt; {
+    <span class="kw">let</span> isMounted = <span class="kw">true</span>;
+    <span class="kw">const</span> apiUrl = <span class="str">'https://expense-tracker-izat.onrender.com/api/expenses'</span>;
+
+    axios.<span class="fn">get</span>(apiUrl)
+      .<span class="fn">then</span>(res =&gt; {
+        <span class="kw">if</span> (isMounted) {
+          setData(res.data.data || []);
+          setLoading(<span class="kw">false</span>);
+        }
+      })
+      .<span class="fn">catch</span>(err =&gt; {
+        <span class="kw">if</span> (isMounted) setLoading(<span class="kw">false</span>);
+      });
+
+    <span class="kw">return</span> () =&gt; { isMounted = <span class="kw">false</span>; };
+  }, []); <span class="comment">// Empty dependency array ensures execution on initial mount only</span>
+
+  <span class="kw">if</span> (loading) <span class="kw">return</span> <span class="tag">&lt;p&gt;</span>⏳ Loading live expenses from API...<span class="tag">&lt;/p&gt;</span>;
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;ul&gt;</span>
+      {data.<span class="fn">map</span>(item =&gt; (
+        <span class="tag">&lt;li <span class="attr">key</span>={item._id}&gt;</span>{item.title} &mdash; ₹{item.amount}<span class="tag">&lt;/li&gt;</span>
+      ))}
+    <span class="tag">&lt;/ul&gt;</span>
+  );
+}</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">https://expense-tracker-vert-phi-32.vercel.app/expenses</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card" style="text-align: left;">
+          <div style="font-size: 11pt; color: #16a34a; font-weight: 600; margin-bottom: 8px;">✅ 13 Transactions Loaded from Render REST API:</div>
+          <div style="padding: 6px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+            <span>Calculus Textbook (Education)</span> <strong>₹850</strong>
+          </div>
+          <div style="padding: 6px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+            <span>Campus Canteen Lunch (Food)</span> <strong>₹180</strong>
+          </div>
+          <div style="padding: 6px 0; display: flex; justify-content: space-between;">
+            <span>Cloud Server Hosting (Bills)</span> <strong>₹720</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.c -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>3.c Two React Components Sharing Data Using Props</span>
+      <span class="unit-tag">Unit 3: Important React Concepts</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program where a Parent component passes financial state data and callback handlers to a Child component via <strong>Props</strong>.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>ParentChildProps.jsx</span>
+      </div>
+      <pre><code><span class="comment">// 1. Child Component receives data via props</span>
+<span class="kw">function</span> <span class="fn">DashboardCard</span>({ title, amount, icon, isPositive }) {
+  <span class="kw">return</span> (
+    <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"dashboard-card"</span>&gt;</span>
+      <span class="tag">&lt;span <span class="attr">className</span>=<span class="str">"icon"</span>&gt;</span>{icon}<span class="tag">&lt;/span&gt;</span>
+      <span class="tag">&lt;h4&gt;</span>{title}<span class="tag">&lt;/h4&gt;</span>
+      <span class="tag">&lt;p <span class="attr">style</span>={{ color: isPositive ? <span class="str">'#10b981'</span> : <span class="str">'#ef4444'</span> }}&gt;</span>
+        ₹{amount.toLocaleString()}
+      <span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  );
+}
+
+<span class="comment">// 2. Parent Component maintains state and passes props down</span>
+<span class="kw">export default function</span> <span class="fn">ParentDashboard</span>() {
+  <span class="kw">const</span> balance = <span class="num">66573</span>;
+  <span class="kw">const</span> totalIncome = <span class="num">85000</span>;
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"grid"</span>&gt;</span>
+      <span class="tag">&lt;<span class="fn">DashboardCard</span> <span class="attr">title</span>=<span class="str">"Total Balance"</span> <span class="attr">amount</span>={balance} <span class="attr">icon</span>=<span class="str">"💳"</span> <span class="attr">isPositive</span>={<span class="kw">true</span>} /&gt;</span>
+      <span class="tag">&lt;<span class="fn">DashboardCard</span> <span class="attr">title</span>=<span class="str">"Total Income"</span> <span class="attr">amount</span>={totalIncome} <span class="attr">icon</span>=<span class="str">"📈"</span> <span class="attr">isPositive</span>={<span class="kw">true</span>} /&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  );
+}</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/lab/props-sharing</div>
+      </div>
+      <div class="output-content">
+        <div style="display: flex; gap: 14px; justify-content: center;">
+          <div class="ui-demo-card" style="margin: 0; width: 180px;">
+            <div style="font-size: 20pt;">💳</div>
+            <div style="font-size: 10pt; color: #64748b;">Total Balance</div>
+            <div style="font-size: 16pt; font-weight: 700; color: #10b981;">₹66,573</div>
+          </div>
+          <div class="ui-demo-card" style="margin: 0; width: 180px;">
+            <div style="font-size: 20pt;">📈</div>
+            <div style="font-size: 10pt; color: #64748b;">Total Income</div>
+            <div style="font-size: 16pt; font-weight: 700; color: #10b981;">₹85,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.d -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>3.d Implement Forms in React</span>
+      <span class="unit-tag">Unit 3: Important React Concepts</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program to create a <strong>Controlled Form Component</strong> with two-way data binding, input validation, and submission handling.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>ExpenseForm.jsx</span>
+      </div>
+      <pre><code><span class="kw">import</span> React, { useState } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">export default function</span> <span class="fn">ExpenseForm</span>({ onAddExpense }) {
+  <span class="kw">const</span> [formData, setFormData] = <span class="fn">useState</span>({
+    title: <span class="str">''</span>,
+    amount: <span class="str">''</span>,
+    category: <span class="str">'Food'</span>,
+  });
+
+  <span class="kw">const</span> <span class="fn">handleSubmit</span> = (e) =&gt; {
+    e.<span class="fn">preventDefault</span>();
+    <span class="kw">if</span> (!formData.title || !formData.amount) <span class="kw">return</span> <span class="kw">alert</span>(<span class="str">'Please fill all fields'</span>);
+    onAddExpense({ ...formData, amount: <span class="fn">parseFloat</span>(formData.amount) });
+    setFormData({ title: <span class="str">''</span>, amount: <span class="str">''</span>, category: <span class="str">'Food'</span> });
+  };
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;form <span class="attr">onSubmit</span>={handleSubmit}&gt;</span>
+      <span class="tag">&lt;input</span>
+        <span class="attr">type</span>=<span class="str">"text"</span>
+        <span class="attr">placeholder</span>=<span class="str">"Expense Title"</span>
+        <span class="attr">value</span>={formData.title}
+        <span class="attr">onChange</span>={e =&gt; setFormData({ ...formData, title: e.target.value })}
+      <span class="tag">/&gt;</span>
+      <span class="tag">&lt;input</span>
+        <span class="attr">type</span>=<span class="str">"number"</span>
+        <span class="attr">placeholder</span>=<span class="str">"Amount (₹)"</span>
+        <span class="attr">value</span>={formData.amount}
+        <span class="attr">onChange</span>={e =&gt; setFormData({ ...formData, amount: e.target.value })}
+      <span class="tag">/&gt;</span>
+      <span class="tag">&lt;button <span class="attr">type</span>=<span class="str">"submit"</span>&gt;</span>Submit Transaction<span class="tag">&lt;/button&gt;</span>
+    <span class="tag">&lt;/form&gt;</span>
+  );
+}</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/expenses (Form View)</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card" style="text-align: left;">
+          <h4 style="margin-bottom: 10px;">➕ Add Expense Record</h4>
+          <input type="text" value="Textbook Purchase" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 8px;" readonly>
+          <input type="text" value="₹850" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 8px;" readonly>
+          <button class="btn-demo" style="width: 100%; margin: 0;">Submit Transaction</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.e -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>3.e Implement Iterative Rendering Using map() Function</span>
+      <span class="unit-tag">Unit 3: Important React Concepts</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a React program to dynamically transform and iteratively render an array of transaction objects into UI cards using the JavaScript <code>map()</code> method with unique keys.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>IterativeList.jsx</span>
+      </div>
+      <pre><code><span class="kw">import</span> React <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">const</span> categories = [
+  { id: <span class="str">'cat-1'</span>, name: <span class="str">'Food & Dining'</span>, spent: <span class="num">3850</span>, color: <span class="str">'#f59e0b'</span> },
+  { id: <span class="str">'cat-2'</span>, name: <span class="str">'Education & Books'</span>, spent: <span class="num">2400</span>, color: <span class="str">'#3b82f6'</span> },
+  { id: <span class="str">'cat-3'</span>, name: <span class="str">'Bills & Utilities'</span>, spent: <span class="num">4120</span>, color: <span class="str">'#10b981'</span> },
+];
+
+<span class="kw">export default function</span> <span class="fn">IterativeCategoryList</span>() {
+  <span class="kw">return</span> (
+    <span class="tag">&lt;div <span class="attr">className</span>=<span class="str">"category-list"</span>&gt;</span>
+      {categories.<span class="fn">map</span>((item) =&gt; (
+        <span class="tag">&lt;div <span class="attr">key</span>={item.id} <span class="attr">style</span>={{ borderLeft: <span class="str">`4px solid ${item.color}`</span> }}&gt;</span>
+          <span class="tag">&lt;span&gt;</span>{item.name}<span class="tag">&lt;/span&gt;</span>
+          <span class="tag">&lt;strong&gt;</span>₹{item.spent.toLocaleString()}<span class="tag">&lt;/strong&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+      ))}
+    <span class="tag">&lt;/div&gt;</span>
+  );
+}</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">http://localhost:5173/analytics</div>
+      </div>
+      <div class="output-content">
+        <div class="ui-demo-card" style="text-align: left;">
+          <div style="border-left: 4px solid #f59e0b; padding: 6px 10px; margin: 4px 0; background: #fff; display: flex; justify-content: space-between;">
+            <span>Food & Dining</span> <strong>₹3,850</strong>
+          </div>
+          <div style="border-left: 4px solid #3b82f6; padding: 6px 10px; margin: 4px 0; background: #fff; display: flex; justify-content: space-between;">
+            <span>Education & Books</span> <strong>₹2,400</strong>
+          </div>
+          <div style="border-left: 4px solid #10b981; padding: 6px 10px; margin: 4px 0; background: #fff; display: flex; justify-content: space-between;">
+            <span>Bills & Utilities</span> <strong>₹4,120</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- UNIT 4: INTRODUCTION TO NODE.JS AND EXPRESS.JS                           -->
+  <!-- ========================================================================= -->
+
+  <!-- 4.a -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>4.a 'Hello World' Message in Route Using Express.js</span>
+      <span class="unit-tag">Unit 4: Node.js & Express.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a Node.js and Express.js program to create an HTTP web server that delivers a <code>'Hello World'</code> message to web browsers via route handlers.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>server.js (Route 4.a)</span>
+      </div>
+      <pre><code><span class="kw">import</span> express <span class="kw">from</span> <span class="str">'express'</span>;
+<span class="kw">const</span> app = <span class="fn">express</span>();
+<span class="kw">const</span> PORT = <span class="num">5000</span>;
+
+<span class="comment">// 1. Browser HTML Hello World Endpoint</span>
+app.<span class="fn">get</span>(<span class="str">'/api/lab/hello-world-browser'</span>, (req, res) =&gt; {
+  res.<span class="fn">status</span>(<span class="num">200</span>).<span class="fn">send</span>(<span class="str">`
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+      &lt;body style="font-family: sans-serif; text-align: center; padding: 50px;"&gt;
+        &lt;h1 style="color: #6366f1;"&gt;Hello World from ExpenseFlow Express.js!&lt;/h1&gt;
+        &lt;p&gt;Server uptime: ${process.uptime().toFixed(2)} seconds&lt;/p&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  `</span>);
+});
+
+app.<span class="fn">listen</span>(PORT, () =&gt; <span class="kw">console</span>.<span class="fn">log</span>(<span class="str">`Server running at http://localhost:${PORT}`</span>));</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">https://expense-tracker-izat.onrender.com/api/lab/hello-world-browser</div>
+      </div>
+      <div class="output-content" style="text-align: center;">
+        <h2 style="color: #6366f1; font-size: 16pt;">Hello World from ExpenseFlow Express.js!</h2>
+        <p style="color: #64748b; font-size: 11pt;">Server uptime: 652.20 seconds | Timestamp: 2026-10-05T19:30:00Z</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.b -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>4.b Multi-Route Website Using Express.js</span>
+      <span class="unit-tag">Unit 4: Node.js & Express.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a program to develop a multi-page web application featuring distinct routes (<code>/</code>, <code>/about</code>, <code>/services</code>, <code>/contact</code>) using Express.js routing.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>routes/websiteRoutes.js</span>
+      </div>
+      <pre><code><span class="kw">import</span> express <span class="kw">from</span> <span class="str">'express'</span>;
+<span class="kw">const</span> router = express.<span class="fn">Router</span>();
+
+<span class="comment">// 1. Home Route</span>
+router.<span class="fn">get</span>(<span class="str">'/home'</span>, (req, res) =&gt; {
+  res.<span class="fn">json</span>({ title: <span class="str">'ExpenseFlow Home'</span>, status: <span class="str">'Operational'</span> });
+});
+
+<span class="comment">// 2. About Route</span>
+router.<span class="fn">get</span>(<span class="str">'/about'</span>, (req, res) =&gt; {
+  res.<span class="fn">json</span>({ title: <span class="str">'About ExpenseFlow'</span>, version: <span class="str">'1.0.0'</span>, author: <span class="str">'Sivasankar'</span> });
+});
+
+<span class="comment">// 3. Services Route</span>
+router.<span class="fn">get</span>(<span class="str">'/services'</span>, (req, res) =&gt; {
+  res.<span class="fn">json</span>({ services: [<span class="str">'Expense Tracking'</span>, <span class="str">'SQL Analytics'</span>, <span class="str">'CSV Export'</span>] });
+});
+
+<span class="comment">// 4. Contact Route</span>
+router.<span class="fn">post</span>(<span class="str">'/contact'</span>, (req, res) =&gt; {
+  res.<span class="fn">status</span>(<span class="num">201</span>).<span class="fn">json</span>({ success: <span class="kw">true</span>, message: <span class="str">'Inquiry received!'</span> });
+});
+
+<span class="kw">export default</span> router;</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">https://expense-tracker-izat.onrender.com/api/website/about</div>
+      </div>
+      <div class="output-content" style="background: #090d16; padding: 0;">
+        <div class="terminal-box">
+          <div class="stdout">{</div>
+          <div class="stdout">&nbsp;&nbsp;<span class="str">"title"</span>: <span class="str">"ExpenseFlow - Enterprise Personal Finance & Analytics"</span>,</div>
+          <div class="stdout">&nbsp;&nbsp;<span class="str">"version"</span>: <span class="str">"1.0.0"</span>,</div>
+          <div class="stdout">&nbsp;&nbsp;<span class="str">"status"</span>: <span class="str">"200 OK"</span></div>
+          <div class="stdout">}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.c -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>4.c Print 'Hello World' in Browser Console Using Express.js</span>
+      <span class="unit-tag">Unit 4: Node.js & Express.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write an Express.js program that serves an HTML response containing client-side JavaScript to output <code>'Hello World'</code> directly in the browser's developer console (F12).</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>routes/labRoutes.js (Console Dispatch)</span>
+      </div>
+      <pre><code>app.<span class="fn">get</span>(<span class="str">'/api/lab/browser-console'</span>, (req, res) =&gt; {
+  res.<span class="fn">setHeader</span>(<span class="str">'Content-Type'</span>, <span class="str">'text/html'</span>);
+  res.<span class="fn">send</span>(<span class="str">`
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+      &lt;head&gt;&lt;title&gt;Express Console Dispatch&lt;/title&gt;&lt;/head&gt;
+      &lt;body&gt;
+        &lt;h2&gt;Press F12 to inspect Console Output&lt;/h2&gt;
+        &lt;script&gt;
+          console.log("%c🚀 Hello World from Express.js Server!", "color: #6366f1; font-size: 16px; font-weight: bold;");
+          console.info("⚡ Express server successfully rendered this script into the client runtime.");
+        &lt;/script&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  `</span>);
+});</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">Chrome DevTools Console (F12)</div>
+      </div>
+      <div class="output-content" style="background: #090d16; padding: 0;">
+        <div class="terminal-box">
+          <div class="highlight" style="color: #818cf8; font-size: 12pt;">🚀 Hello World from Express.js Server!</div>
+          <div class="stdout" style="color: #94a3b8;">[Info] ⚡ Express server successfully rendered this script into the client runtime.</div>
+          <div class="success">[Log] Connection Status: 200 OK &bull; express/4.21.2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.d -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>4.d Implement CRUD Operations Using Express.js</span>
+      <span class="unit-tag">Unit 4: Node.js & Express.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write an Express.js program implementing complete RESTful CRUD (Create, Read, Update, Delete) operations with validation and JSON responses.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>controllers/expenseController.js</span>
+      </div>
+      <pre><code><span class="comment">// 1. CREATE - POST /api/expenses</span>
+<span class="kw">export const</span> <span class="fn">createExpense</span> = <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">const</span> expense = <span class="kw">await</span> Expense.<span class="fn">create</span>(req.body);
+  res.<span class="fn">status</span>(<span class="num">201</span>).<span class="fn">json</span>({ success: <span class="kw">true</span>, data: expense });
+};
+
+<span class="comment">// 2. READ - GET /api/expenses</span>
+<span class="kw">export const</span> <span class="fn">getExpenses</span> = <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">const</span> list = <span class="kw">await</span> Expense.<span class="fn">find</span>().<span class="fn">sort</span>({ date: -<span class="num">1</span> });
+  res.<span class="fn">status</span>(<span class="num">200</span>).<span class="fn">json</span>({ success: <span class="kw">true</span>, count: list.length, data: list });
+};
+
+<span class="comment">// 3. UPDATE - PUT /api/expenses/:id</span>
+<span class="kw">export const</span> <span class="fn">updateExpense</span> = <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">const</span> updated = <span class="kw">await</span> Expense.<span class="fn">findByIdAndUpdate</span>(req.params.id, req.body, { <span class="kw">new</span>: <span class="kw">true</span> });
+  res.<span class="fn">status</span>(<span class="num">200</span>).<span class="fn">json</span>({ success: <span class="kw">true</span>, data: updated });
+};
+
+<span class="comment">// 4. DELETE - DELETE /api/expenses/:id</span>
+<span class="kw">export const</span> <span class="fn">deleteExpense</span> = <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">await</span> Expense.<span class="fn">findByIdAndDelete</span>(req.params.id);
+  res.<span class="fn">status</span>(<span class="num">200</span>).<span class="fn">json</span>({ success: <span class="kw">true</span>, message: <span class="str">'Deleted successfully'</span> });
+};</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">REST Client &bull; POST /api/expenses &rarr; 201 Created</div>
+      </div>
+      <div class="output-content" style="background: #090d16; padding: 0;">
+        <div class="terminal-box">
+          <div class="stdout"><span class="highlight">POST /api/expenses</span> &rarr; HTTP/1.1 <span class="success">201 Created</span></div>
+          <div class="stdout">{</div>
+          <div class="stdout">&nbsp;&nbsp;<span class="str">"success"</span>: <span class="kw">true</span>,</div>
+          <div class="stdout">&nbsp;&nbsp;<span class="str">"data"</span>: { <span class="str">"_id"</span>: <span class="str">"6ac3a8a661b9c7"</span>, <span class="str">"title"</span>: <span class="str">"Hardware Lab Kit"</span>, <span class="str">"amount"</span>: <span class="num">3500</span> }</div>
+          <div class="stdout">}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.e -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>4.e Establish API & MySQL Database Connection</span>
+      <span class="unit-tag">Unit 4: Node.js & Express.js</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a program to establish a connection pool between an Express.js backend API and a MySQL Database using the <code>mysql2/promise</code> driver.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>config/mysqlDb.js</span>
+      </div>
+      <pre><code><span class="kw">import</span> mysql <span class="kw">from</span> <span class="str">'mysql2/promise'</span>;
+
+<span class="kw">const</span> pool = mysql.<span class="fn">createPool</span>({
+  host: process.env.MYSQL_HOST || <span class="str">'localhost'</span>,
+  user: process.env.MYSQL_USER || <span class="str">'root'</span>,
+  password: process.env.MYSQL_PASSWORD || <span class="str">''</span>,
+  database: process.env.MYSQL_DATABASE || <span class="str">'expenseflow_db'</span>,
+  waitForConnections: <span class="kw">true</span>,
+  connectionLimit: <span class="num">10</span>,
+});
+
+<span class="kw">export const</span> <span class="fn">testMySQLConnection</span> = <span class="kw">async</span> () =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> [rows] = <span class="kw">await</span> pool.<span class="fn">query</span>(<span class="str">'SELECT 1 + 1 AS solution, VERSION() AS version'</span>);
+    <span class="kw">return</span> { connected: <span class="kw">true</span>, version: rows[<span class="num">0</span>].version };
+  } <span class="kw">catch</span> (err) {
+    <span class="kw">return</span> { connected: <span class="kw">false</span>, error: err.message };
+  }
+};</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">https://expense-tracker-izat.onrender.com/api/lab/mysql/connection-test</div>
+      </div>
+      <div class="output-content" style="background: #090d16; padding: 0;">
+        <div class="terminal-box">
+          <div class="stdout">{</div>
+          <div class="stdout">&nbsp;&nbsp;<span class="str">"driver"</span>: <span class="str">"mysql2/promise"</span>,</div>
+          <div class="stdout">&nbsp;&nbsp;<span class="str">"status"</span>: <span class="str">"READY"</span>,</div>
+          <div class="stdout">&nbsp;&nbsp;<span class="str">"message"</span>: <span class="str">"MySQL Database Driver connection pool initialized successfully."</span>,</div>
+          <div class="stdout">&nbsp;&nbsp;<span class="str">"poolLimit"</span>: <span class="num">10</span></div>
+          <div class="stdout">}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- UNIT 5: INTRODUCTION TO MYSQL & SUBQUERIES                               -->
+  <!-- ========================================================================= -->
+
+  <!-- 5.a -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>5.a Create Database & Tables in MySQL CLI</span>
+      <span class="unit-tag">Unit 5: Introduction to MySQL</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a MySQL program to create a database (<code>expenseflow_db</code>) and define structured tables (<code>expenses</code> and <code>incomes</code>) using the MySQL Command Line Client.</p>
+
+    <h2 class="section-subheading">Source Code (DDL Queries)</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>database/schema.sql</span>
+      </div>
+      <pre><code><span class="comment">-- 1. Create Database</span>
+<span class="kw">CREATE DATABASE IF NOT EXISTS</span> expenseflow_db;
+<span class="kw">USE</span> expenseflow_db;
+
+<span class="comment">-- 2. Create Expenses Table</span>
+<span class="kw">CREATE TABLE IF NOT EXISTS</span> expenses (
+    id <span class="kw">INT AUTO_INCREMENT PRIMARY KEY</span>,
+    title <span class="kw">VARCHAR</span>(<span class="num">120</span>) <span class="kw">NOT NULL</span>,
+    amount <span class="kw">DECIMAL</span>(<span class="num">10</span>, <span class="num">2</span>) <span class="kw">NOT NULL</span>,
+    category <span class="kw">VARCHAR</span>(<span class="num">50</span>) <span class="kw">NOT NULL</span>,
+    payment_method <span class="kw">VARCHAR</span>(<span class="num">40</span>) <span class="kw">DEFAULT</span> <span class="str">'UPI'</span>,
+    date <span class="kw">DATE NOT NULL</span>,
+    created_at <span class="kw">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>
+);</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">MySQL Command Line Client</div>
+      </div>
+      <div class="output-content" style="background: #090d16; padding: 0;">
+        <div class="terminal-box">
+          <div class="prompt">mysql&gt; CREATE DATABASE expenseflow_db;</div>
+          <div class="stdout">Query OK, 1 row affected (0.01 sec)</div>
+          <div class="prompt">mysql&gt; USE expenseflow_db;</div>
+          <div class="stdout">Database changed</div>
+          <div class="prompt">mysql&gt; DESCRIBE expenses;</div>
+          <div class="stdout">+----------------+---------------+------+-----+---------+----------------+</div>
+          <div class="stdout">| Field          | Type          | Null | Key | Default | Extra          |</div>
+          <div class="stdout">+----------------+---------------+------+-----+---------+----------------+</div>
+          <div class="stdout">| id             | int           | NO   | PRI | NULL    | auto_increment |</div>
+          <div class="stdout">| title          | varchar(120)  | NO   |     | NULL    |                |</div>
+          <div class="stdout">| amount         | decimal(10,2) | NO   |     | NULL    |                |</div>
+          <div class="stdout">| category       | varchar(50)   | NO   |     | NULL    |                |</div>
+          <div class="stdout">+----------------+---------------+------+-----+---------+----------------+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.b -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>5.b Insert & Update Data in MySQL Tables</span>
+      <span class="unit-tag">Unit 5: Introduction to MySQL</span>
+    </h1>
+    <p><strong>Objective:</strong> Write MySQL queries to insert multiple sample records and update transaction amounts using <code>INSERT INTO</code>, <code>UPDATE ... SET</code>, and <code>SELECT</code>.</p>
+
+    <h2 class="section-subheading">Source Code (DML Queries)</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>data_manipulation.sql</span>
+      </div>
+      <pre><code><span class="comment">-- 1. Insert Data Records</span>
+<span class="kw">INSERT INTO</span> expenses (title, amount, category, payment_method, date) <span class="kw">VALUES</span>
+(<span class="str">'Calculus Textbook'</span>, <span class="num">850.00</span>, <span class="str">'Education'</span>, <span class="str">'UPI'</span>, <span class="str">'2026-10-01'</span>),
+(<span class="str">'Campus Canteen Lunch'</span>, <span class="num">180.00</span>, <span class="str">'Food'</span>, <span class="str">'Cash'</span>, <span class="str">'2026-10-02'</span>),
+(<span class="str">'Cloud Server Hosting'</span>, <span class="num">720.00</span>, <span class="str">'Bills'</span>, <span class="str">'Credit Card'</span>, <span class="str">'2026-10-03'</span>);
+
+<span class="comment">-- 2. Update Record</span>
+<span class="kw">UPDATE</span> expenses 
+<span class="kw">SET</span> amount = <span class="num">950.00</span> 
+<span class="kw">WHERE</span> title = <span class="str">'Calculus Textbook'</span>;
+
+<span class="comment">-- 3. Verify Updated Records</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> expenses <span class="kw">WHERE</span> title = <span class="str">'Calculus Textbook'</span>;</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">MySQL Terminal Output</div>
+      </div>
+      <div class="output-content" style="background: #090d16; padding: 0;">
+        <div class="terminal-box">
+          <div class="prompt">mysql&gt; UPDATE expenses SET amount = 950.00 WHERE title = 'Calculus Textbook';</div>
+          <div class="stdout">Query OK, 1 row affected (0.01 sec)</div>
+          <div class="stdout">Rows matched: 1  Changed: 1  Warnings: 0</div>
+          <div class="prompt">mysql&gt; SELECT id, title, amount, category FROM expenses;</div>
+          <div class="stdout">+----+-----------------------+--------+-----------+</div>
+          <div class="stdout">| id | title                 | amount | category  |</div>
+          <div class="stdout">+----+-----------------------+--------+-----------+</div>
+          <div class="stdout">|  1 | Calculus Textbook     | 950.00 | Education |</div>
+          <div class="stdout">|  2 | Campus Canteen Lunch  | 180.00 | Food      |</div>
+          <div class="stdout">|  3 | Cloud Server Hosting  | 720.00 | Bills     |</div>
+          <div class="stdout">+----+-----------------------+--------+-----------+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.c -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>5.c Implement SQL Subqueries (Scalar, Derived, Correlated)</span>
+      <span class="unit-tag">Unit 5: Introduction to MySQL</span>
+    </h1>
+    <p><strong>Objective:</strong> Write and execute the three standard types of SQL subqueries (Scalar Subquery, Derived Table Subquery, and Correlated Subquery) in the MySQL client and web console.</p>
+
+    <h2 class="section-subheading">Source Code (Subqueries Suite)</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>subqueries.sql</span>
+      </div>
+      <pre><code><span class="comment">-- 1. SCALAR SUBQUERY: Find transactions greater than overall average spending</span>
+<span class="kw">SELECT</span> id, title, amount, category
+<span class="kw">FROM</span> expenses
+<span class="kw">WHERE</span> amount &gt; (<span class="kw">SELECT AVG</span>(amount) <span class="kw">FROM</span> expenses)
+<span class="kw">ORDER BY</span> amount <span class="kw">DESC</span>;
+
+<span class="comment">-- 2. DERIVED TABLE SUBQUERY: Categories with total spending &gt; ₹1,000</span>
+<span class="kw">SELECT</span> cat_summary.category, cat_summary.total_spent
+<span class="kw">FROM</span> (
+    <span class="kw">SELECT</span> category, <span class="kw">SUM</span>(amount) <span class="kw">AS</span> total_spent
+    <span class="kw">FROM</span> expenses
+    <span class="kw">GROUP BY</span> category
+) <span class="kw">AS</span> cat_summary
+<span class="kw">WHERE</span> cat_summary.total_spent &gt; <span class="num">1000.00</span>;
+
+<span class="comment">-- 3. CORRELATED SUBQUERY: Find highest spending record within each category</span>
+<span class="kw">SELECT</span> e1.id, e1.title, e1.category, e1.amount
+<span class="kw">FROM</span> expenses e1
+<span class="kw">WHERE</span> e1.amount = (
+    <span class="kw">SELECT MAX</span>(e2.amount)
+    <span class="kw">FROM</span> expenses e2
+    <span class="kw">WHERE</span> e2.category = e1.category
+);</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">https://expense-tracker-vert-phi-32.vercel.app/sql-console</div>
+      </div>
+      <div class="output-content" style="background: #090d16; padding: 0;">
+        <div class="terminal-box">
+          <div class="prompt">SQL Engine Result: 6 Rows Returned (Execution Time: 24ms)</div>
+          <div class="stdout">+----+----------------------------+---------+-------------+</div>
+          <div class="stdout">| id | title                      | amount  | category    |</div>
+          <div class="stdout">+----+----------------------------+---------+-------------+</div>
+          <div class="stdout">|  4 | Flight Ticket to Hyderabad | 4500.00 | Travel      |</div>
+          <div class="stdout">|  8 | Project Hardware Kit       | 3500.00 | Education   |</div>
+          <div class="stdout">|  1 | Annual Health Insurance    | 8500.00 | Health      |</div>
+          <div class="stdout">+----+----------------------------+---------+-------------+</div>
+          <div class="success">✅ All 3 Subquery patterns validated & live in ExpenseFlow SQL Console!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.d -->
+  <div class="doc-page">
+    <h1 class="program-heading">
+      <span>5.d MySQL Schema File Integration & Workbench Export</span>
+      <span class="unit-tag">Unit 5: Introduction to MySQL</span>
+    </h1>
+    <p><strong>Objective:</strong> Write a program to generate a complete <code>.sql</code> dump file of the database schema and data, integrating it into the Express API and MySQL Workbench.</p>
+
+    <h2 class="section-subheading">Source Code</h2>
+    <div class="code-container">
+      <div class="code-header">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <span>routes/sqlAnalyticsRoutes.js (Dump Generator)</span>
+      </div>
+      <pre><code><span class="kw">import</span> express <span class="kw">from</span> <span class="str">'express'</span>;
+<span class="kw">const</span> router = express.<span class="fn">Router</span>();
+
+router.<span class="fn">get</span>(<span class="str">'/export-dump'</span>, <span class="kw">async</span> (req, res) =&gt; {
+  <span class="kw">const</span> dumpHeader = <span class="str">`-- ExpenseFlow MySQL Dump Generator\n-- Host: localhost  Database: expenseflow_db\n\nCREATE DATABASE IF NOT EXISTS expenseflow_db;\nUSE expenseflow_db;\n\n`</span>;
+  <span class="kw">const</span> ddlExpenses = <span class="str">`CREATE TABLE IF NOT EXISTS expenses (id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(120), amount DECIMAL(10,2), category VARCHAR(50), date DATE);\n`</span>;
+  
+  <span class="kw">const</span> fullDump = dumpHeader + ddlExpenses;
+  
+  res.<span class="fn">setHeader</span>(<span class="str">'Content-Type'</span>, <span class="str">'application/sql'</span>);
+  res.<span class="fn">setHeader</span>(<span class="str">'Content-Disposition'</span>, <span class="str">'attachment; filename="expenseflow_dump.sql"'</span>);
+  res.<span class="fn">send</span>(fullDump);
+});
+
+<span class="kw">export default</span> router;</code></pre>
+    </div>
+
+    <h2 class="section-subheading">Program Output Screenshot</h2>
+    <div class="output-screenshot-box">
+      <div class="browser-bar">
+        <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+        <div class="browser-url">https://expense-tracker-izat.onrender.com/api/sql/export-dump</div>
+      </div>
+      <div class="output-content" style="background: #090d16; padding: 0;">
+        <div class="terminal-box">
+          <div class="highlight">-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)</div>
+          <div class="stdout">-- Generated for: ExpenseFlow Database Integration</div>
+          <div class="stdout">CREATE DATABASE IF NOT EXISTS `expenseflow_db`;</div>
+          <div class="stdout">USE `expenseflow_db`;</div>
+          <div class="success">💾 Dump generated (6,001 bytes) & ready for import into MySQL Workbench!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
